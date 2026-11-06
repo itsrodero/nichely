@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nichely Pro waitlist</title>
+    <meta name="description" content="Tell us which Nichely Pro features you want and get 50% off the first year when Pro launches." />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="../icon128.png" />
+    <link rel="stylesheet" href="../style.css" />
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"],wait_for_update:500});gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});gtag('js',new Date());gtag('config','G-MKM07L3RLR');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-MKM07L3RLR';document.head.appendChild(s);},1200);});</script>
+  </head>
+  <body>
+    <header class="top"><a href="../" class="logo"><img src="../icon128.png" alt="" width="28" height="28" />Nichely</a></header>
+    <main class="doc">
+      <h1>Nichely Pro is coming</h1>
+      <p>Pick the features you want most. We build the most requested ones first, and everyone on the list gets
+        <strong>50% off the first year</strong>.</p>
+      <form id="waitlist" class="waitlist">
+        <fieldset>
+          <legend>Which would you use?</legend>
+          <label class="feature"><input type="checkbox" name="feature" value="track" /><span><strong>Track a niche</strong> <em>Soon</em><br />Daily rank and sales history for a keyword's top books, with alerts when the niche heats up.</span></label>
+          <label class="feature"><input type="checkbox" name="feature" value="volume" /><span><strong>Search volume</strong> <em>Soon</em><br />Estimated monthly searches for every keyword idea.</span></label>
+          <label class="feature"><input type="checkbox" name="feature" value="reverse" /><span><strong>Reverse ASIN</strong> <em>Soon</em><br />The keywords any book ranks for, to borrow what works.</span></label>
+          <label class="feature"><input type="checkbox" name="feature" value="bulk" /><span><strong>Bulk niche check</strong> <em>Soon</em><br />Score 50 keywords at once and sort them by opportunity.</span></label>
+        </fieldset>
+        <label class="field"><span>Anything else you'd pay for? (optional)</span><textarea name="comment" rows="3" maxlength="1000"></textarea></label>
+        <label class="field"><span>Email</span><input type="email" name="email" required autocomplete="email" maxlength="200" /></label>
+        <label class="consent"><input type="checkbox" name="consent" required /><span>Email me when Nichely Pro launches. I can unsubscribe at any time.</span></label>
+        <button class="btn" type="submit" style="border:0;cursor:pointer;font:inherit;font-weight:800">Join the waitlist</button>
+        <p class="form-msg" role="alert" hidden></p>
+        <p class="muted small">We only use your email for the Pro launch. See the <a href="../privacy.html">privacy policy</a>.</p>
+      </form>
+      <p id="thanks" class="thanks" role="status" hidden>Thanks! You're on the list. We'll email you when Nichely Pro is ready, with your 50% discount.</p>
+    </main>
+    <script>
+    (function () {
+      // Same Google Form as the Leafpost waitlist; "nichely" in Source and in each feature keeps the lists apart.
+      var FORM = {
+        action: 'https://docs.google.com/forms/d/e/1FAIpQLScdXcUCX0gxzC544GPy_v9pci35rMe7un0DrUK7RWMeKzT53w/formResponse',
+        entry: { email: 'entry.791917642', features: 'entry.75689870', comment: 'entry.1451580480', source: 'entry.1357422267' },
+      };
+      var IDS = ['track', 'volume', 'reverse', 'bulk'];
+      var q = new URLSearchParams(location.search);
+      var door = IDS.indexOf(q.get('f')) >= 0 ? q.get('f') : '';
+      var from = (q.get('from') || 'web').replace(/[^a-z]/g, '').slice(0, 12);
+      var version = (q.get('v') || '').replace(/[^0-9.]/g, '').slice(0, 12);
+      var form = document.getElementById('waitlist');
+      var msg = form.querySelector('.form-msg');
+      var box = function (id) { return form.querySelector('input[value="' + id + '"]'); };
+      if (door) {
+        box(door).checked = true;
+        gtag('event', 'nichely_door_' + door, { door_from: from });
+      }
+      function fail(text) {
+        msg.textContent = text;
+        msg.hidden = false;
+        form.querySelector('button').disabled = false;
+      }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var picked = IDS.filter(function (id) { return box(id).checked; });
+        var comment = form.elements.comment.value.trim();
+        if (!picked.length && !comment) return fail('Pick at least one feature, or tell us what you need.');
+        var body = new URLSearchParams();
+        body.append(FORM.entry.email, form.elements.email.value.trim());
+        body.append(FORM.entry.features, picked.map(function (id) { return 'nichely:' + id; }).join(', '));
+        body.append(FORM.entry.comment, comment);
+        body.append(FORM.entry.source, ['nichely', from, version && 'v' + version, door && 'door=' + door].filter(Boolean).join(' | '));
+        form.querySelector('button').disabled = true;
+        msg.hidden = true;
+        // Google Forms sends no CORS headers: the response is opaque, so a resolved request counts as sent.
+        fetch(FORM.action, { method: 'POST', mode: 'no-cors', body: body }).then(function () {
+          gtag('event', 'nichely_waitlist_signup', { door_from: from });
+          picked.forEach(function (id) { gtag('event', 'nichely_want_' + id); });
+          form.hidden = true;
+          document.getElementById('thanks').hidden = false;
+        }, function () { fail('Something went wrong. Please try again in a minute.'); });
+      });
+    })();
+    </script>
+  </body>
+</html>
