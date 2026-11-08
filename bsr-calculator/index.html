@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amazon BSR to Sales Calculator for Books & Kindle (2026) — Nichely</title>
+    <meta name="description" content="Free Amazon BSR calculator: turn a Best Sellers Rank into estimated daily and monthly sales for paperbacks and Kindle ebooks, plus a rank-to-sales table." />
+    <link rel="canonical" href="https://tubetools.online/nichely/bsr-calculator/" />
+    <meta property="og:title" content="Amazon BSR to Sales Calculator for Books & Kindle" />
+    <meta property="og:image" content="https://tubetools.online/nichely/img/shot-2.png" />
+    <link rel="icon" href="../icon128.png" />
+    <link rel="stylesheet" href="../style.css" />
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"],wait_for_update:500});gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});gtag('js',new Date());gtag('config','G-MKM07L3RLR');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-MKM07L3RLR';document.head.appendChild(s);},1200);});</script>
+    <script src="../calc.js"></script>
+  </head>
+  <body>
+    <header class="top"><a href="../" class="logo"><img src="../icon128.png" alt="" width="28" height="28" />Nichely</a></header>
+    <main class="doc">
+      <h1>Amazon BSR to Sales Calculator</h1>
+      <p class="muted">Turn any book's Best Sellers Rank into estimated copies sold per day and per month, for print books
+        and for Kindle ebooks on Amazon.com.</p>
+
+      <form class="calc" id="bsr" onsubmit="return false">
+        <div class="inputs">
+          <label>Best Sellers Rank<input name="bsr" type="number" min="1" step="1" value="25000" /></label>
+          <label>Store<select name="store"><option value="books">Books (paperback, hardcover)</option><option value="kindle">Kindle Store (ebook)</option></select></label>
+          <label>List price (optional, USD)<input name="price" type="number" min="0" step="0.01" value="9.99" /></label>
+        </div>
+        <div class="results">
+          <div class="result"><b id="b-day">–</b><span>estimated sales per day</span></div>
+          <div class="result"><b id="b-month">–</b><span>estimated sales per month</span></div>
+          <div class="result"><b id="b-rev">–</b><span>estimated monthly revenue (list price)</span></div>
+        </div>
+      </form>
+
+      <div class="cta">
+        <strong>Check 10 books at once, right on Amazon.</strong>
+        <p>Nichely reads the rank of the top 10 books for any keyword and shows their estimated sales, reviews and a niche score. Free Chrome extension.</p>
+        <a class="btn" href="https://chromewebstore.google.com/detail/nmldckeaoldbfkfnenpbclfnhpfdpnnp" rel="noopener">Add Nichely to Chrome — free</a>
+      </div>
+
+      <h2>Where to find the BSR</h2>
+      <p>Open the book's page on Amazon.com and scroll to <em>Product details</em>. "Best Sellers Rank: #25,000 in Books"
+        is the number to use. Use the overall rank in Books or Kindle Store, not the smaller category ranks below it.</p>
+
+      <h2>BSR to sales table</h2>
+      <table class="ref" id="table"><thead><tr><th>BSR</th><th>Books: sales/month</th><th>Kindle: sales/month</th></tr></thead><tbody></tbody></table>
+
+      <h2>How accurate is it?</h2>
+      <p>Amazon does not publish sales, so every BSR calculator is an estimate. This one uses a power curve for each store,
+        fitted to commonly reported ranges: around 300 Kindle sales a day at rank #100, and about one print sale a day around
+        rank #100,000. The rank also moves every hour, so a single snapshot can mislead: check a book on several days, and
+        compare books with each other rather than trusting one number.</p>
+      <p>Kindle Unlimited page reads also lift the rank of ebooks, so a Kindle book can rank well without selling that many
+        copies.</p>
+
+      <h2>FAQ</h2>
+      <h3>What is a good BSR for a self-published book?</h3>
+      <p>Under #100,000 in Books means steady sales of roughly 30 or more a month. Under #10,000 is a strong seller with several
+        hundred a month.</p>
+      <h3>How do I know if a niche is worth it?</h3>
+      <p>Look at the ranks of the top 10 books for your keyword, not just one. <a href="../">Nichely</a> does that in one click
+        and adds their reviews and how many are self-published.</p>
+      <p class="muted small">More tools: <a href="../kdp-royalty-calculator/">KDP royalty calculator</a> · <a href="../kdp-cover-size-calculator/">Cover size</a> · <a href="../tools/">All KDP calculators</a></p>
+    </main>
+    <footer><p>Nichely is not affiliated with Amazon. Amazon, Kindle and KDP are trademarks of Amazon.com, Inc. or its affiliates. · <a href="../privacy.html">Privacy</a></p></footer>
+    <script>
+    (function () {
+      var form = document.getElementById('bsr');
+      var num = function (n, d) { return n === null ? '–' : n.toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: d }); };
+      function update() {
+        var f = form.elements;
+        var day = KDP.salesPerDay(parseInt(f.bsr.value, 10), f.store.value);
+        var month = day === null ? null : day * 30;
+        var price = parseFloat(f.price.value);
+        document.getElementById('b-day').textContent = num(day, day !== null && day < 10 ? 2 : 0);
+        document.getElementById('b-month').textContent = num(month, month !== null && month < 10 ? 1 : 0);
+        document.getElementById('b-rev').textContent = month !== null && price > 0 ? '$' + num(month * price, 0) : '–';
+      }
+      form.addEventListener('input', update);
+      update();
+      var rows = [100, 1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 1000000];
+      document.querySelector('#table tbody').innerHTML = rows.map(function (r) {
+        var b = KDP.salesPerDay(r, 'books') * 30, k = KDP.salesPerDay(r, 'kindle') * 30;
+        return '<tr><td>#' + r.toLocaleString('en-US') + '</td><td>' + num(b, b < 10 ? 1 : 0) + '</td><td>' + num(k, k < 10 ? 1 : 0) + '</td></tr>';
+      }).join('');
+    })();
+    </script>
+  </body>
+</html>

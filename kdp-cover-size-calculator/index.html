@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KDP Cover Size & Spine Width Calculator (Paperback) — Nichely</title>
+    <meta name="description" content="Free KDP paperback cover calculator: spine width for white, cream or color paper, full cover size with bleed in inches and pixels at 300 DPI." />
+    <link rel="canonical" href="https://tubetools.online/nichely/kdp-cover-size-calculator/" />
+    <meta property="og:title" content="KDP Cover Size & Spine Width Calculator" />
+    <meta property="og:image" content="https://tubetools.online/nichely/img/shot-1.png" />
+    <link rel="icon" href="../icon128.png" />
+    <link rel="stylesheet" href="../style.css" />
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"],wait_for_update:500});gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});gtag('js',new Date());gtag('config','G-MKM07L3RLR');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-MKM07L3RLR';document.head.appendChild(s);},1200);});</script>
+    <script src="../calc.js"></script>
+  </head>
+  <body>
+    <header class="top"><a href="../" class="logo"><img src="../icon128.png" alt="" width="28" height="28" />Nichely</a></header>
+    <main class="doc">
+      <h1>KDP Cover Size & Spine Width Calculator</h1>
+      <p class="muted">Get the exact full-cover size for a KDP paperback: back, spine and front with 0.125" bleed on every
+        side, in inches and in pixels at 300 DPI.</p>
+
+      <form class="calc" id="cover" onsubmit="return false">
+        <div class="inputs">
+          <label>Trim size<select name="trim">
+            <option value="5x8">5" × 8"</option><option value="5.25x8">5.25" × 8"</option><option value="5.5x8.5">5.5" × 8.5"</option>
+            <option value="6x9" selected>6" × 9"</option><option value="7x10">7" × 10"</option><option value="8x10">8" × 10"</option>
+            <option value="8.25x11">8.25" × 11"</option><option value="8.5x8.5">8.5" × 8.5"</option><option value="8.5x11">8.5" × 11"</option>
+          </select></label>
+          <label>Pages<input name="pages" type="number" min="24" max="828" step="2" value="120" /></label>
+          <label>Paper<select name="paper"><option value="white">White</option><option value="cream">Cream</option><option value="color">Color (standard or premium)</option></select></label>
+        </div>
+        <div class="results">
+          <div class="result"><b id="c-size">–</b><span>full cover (inches)</span></div>
+          <div class="result"><b id="c-px">–</b><span>pixels at 300 DPI</span></div>
+          <div class="result"><b id="c-spine">–</b><span>spine width</span></div>
+          <div class="result"><b id="c-text">–</b><span>spine text</span></div>
+        </div>
+      </form>
+
+      <div class="cta">
+        <strong>Before the cover: is the niche worth it?</strong>
+        <p>Nichely shows the estimated sales, reviews and self-published share of the top 10 books for any keyword on Amazon. Free Chrome extension.</p>
+        <a class="btn" href="https://chromewebstore.google.com/detail/nmldckeaoldbfkfnenpbclfnhpfdpnnp" rel="noopener">Add Nichely to Chrome — free</a>
+      </div>
+
+      <h2>How the size is calculated</h2>
+      <p><strong>Width</strong> = bleed (0.125") + back cover + spine + front cover + bleed (0.125").<br />
+        <strong>Height</strong> = bleed (0.125") + trim height + bleed (0.125").</p>
+      <p><strong>Spine width</strong> depends on the page count and the paper: 0.002252" per page for white paper, 0.0025" for
+        cream and 0.002347" for color. KDP only allows text on the spine when the book has more than 79 pages.</p>
+      <p>Keep titles and important artwork at least 0.125" inside the trim lines, and spine text at least 0.0625" away from the
+        spine edges. For an exact template with the barcode area, download KDP's cover template for your book.</p>
+
+      <h2>FAQ</h2>
+      <h3>What DPI should a KDP cover be?</h3>
+      <p>300 DPI. The pixel size above already uses it.</p>
+      <h3>Does a hardcover use the same size?</h3>
+      <p>No. Hardcovers have a wrap and hinges, so use KDP's hardcover template instead.</p>
+      <p class="muted small">More tools: <a href="../kdp-royalty-calculator/">KDP royalty calculator</a> · <a href="../bsr-calculator/">BSR to sales</a> · <a href="../tools/">All KDP calculators</a></p>
+    </main>
+    <footer><p>Nichely is not affiliated with Amazon. Amazon, Kindle and KDP are trademarks of Amazon.com, Inc. or its affiliates. · <a href="../privacy.html">Privacy</a></p></footer>
+    <script>
+    (function () {
+      var form = document.getElementById('cover');
+      function update() {
+        var f = form.elements;
+        var t = f.trim.value.split('x').map(parseFloat);
+        var c = KDP.coverSize(t[0], t[1], parseInt(f.pages.value, 10), f.paper.value);
+        document.getElementById('c-size').textContent = c ? c.width.toFixed(3) + '" × ' + c.height.toFixed(3) + '"' : '–';
+        document.getElementById('c-px').textContent = c ? c.px.width + ' × ' + c.px.height : '–';
+        document.getElementById('c-spine').textContent = c ? c.spine.toFixed(3) + '"' : '–';
+        document.getElementById('c-text').textContent = c ? (c.spineText ? 'Allowed' : 'Not allowed (79 pages or fewer)') : '–';
+      }
+      form.addEventListener('input', update);
+      update();
+    })();
+    </script>
+  </body>
+</html>

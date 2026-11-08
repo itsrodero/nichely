@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>KDP Royalty Calculator 2026 (Ebook & Paperback) — Nichely</title>
+    <meta name="description" content="Free KDP royalty calculator with 2026 rates: ebook 70% band up to $12.99, paperback 50%/60% and exact Amazon.com printing costs for black and color ink." />
+    <link rel="canonical" href="https://tubetools.online/nichely/kdp-royalty-calculator/" />
+    <meta property="og:title" content="KDP Royalty Calculator 2026 (Ebook & Paperback)" />
+    <meta property="og:image" content="https://tubetools.online/nichely/img/shot-1.png" />
+    <link rel="icon" href="../icon128.png" />
+    <link rel="stylesheet" href="../style.css" />
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"],wait_for_update:500});gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});gtag('js',new Date());gtag('config','G-MKM07L3RLR');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-MKM07L3RLR';document.head.appendChild(s);},1200);});</script>
+    <script src="../calc.js"></script>
+  </head>
+  <body>
+    <header class="top"><a href="../" class="logo"><img src="../icon128.png" alt="" width="28" height="28" />Nichely</a></header>
+    <main class="doc">
+      <h1>KDP Royalty Calculator (2026)</h1>
+      <p class="muted">Updated November 2026 with Amazon.com rates: the 70% ebook band now runs up to $12.99, and paperbacks
+        earn 50% below $9.99 and 60% from $9.99, minus printing.</p>
+
+      <h2>Ebook (Kindle)</h2>
+      <form class="calc" id="ebook" onsubmit="return false">
+        <div class="inputs">
+          <label>List price (USD)<input name="price" type="number" step="0.01" min="0.99" value="4.99" /></label>
+          <label>File size (MB)<input name="mb" type="number" step="0.1" min="0" value="1" /></label>
+          <label>Royalty plan<select name="plan"><option value="auto">70% if eligible</option><option value="35">35%</option></select></label>
+        </div>
+        <div class="results">
+          <div class="result"><b id="e-roy">–</b><span>royalty per sale</span></div>
+          <div class="result"><b id="e-rate">–</b><span>royalty rate</span></div>
+          <div class="result"><b id="e-del">–</b><span>delivery cost</span></div>
+        </div>
+      </form>
+
+      <h2>Paperback</h2>
+      <form class="calc" id="paper" onsubmit="return false">
+        <div class="inputs">
+          <label>List price (USD)<input name="price" type="number" step="0.01" min="0.99" value="9.99" /></label>
+          <label>Pages<input name="pages" type="number" step="2" min="24" max="828" value="120" /></label>
+          <label>Ink<select name="ink"><option value="black">Black</option><option value="standard">Standard color</option><option value="premium">Premium color</option></select></label>
+          <label>Trim size<select name="large"><option value="0">Regular (up to 6.12" × 9")</option><option value="1">Large (wider or taller)</option></select></label>
+        </div>
+        <div class="results">
+          <div class="result"><b id="p-roy">–</b><span>royalty per sale</span></div>
+          <div class="result"><b id="p-print">–</b><span>printing cost</span></div>
+          <div class="result"><b id="p-rate">–</b><span>royalty rate</span></div>
+          <div class="result"><b id="p-min">–</b><span>lowest price that still pays at 60%</span></div>
+        </div>
+        <p class="small muted" id="p-note"></p>
+      </form>
+
+      <div class="cta">
+        <strong>Know the royalty. Now check the demand.</strong>
+        <p>Nichely is a free Chrome extension that shows the estimated sales, reviews and self-published share of the top 10 books for any keyword on Amazon.</p>
+        <a class="btn" href="https://chromewebstore.google.com/detail/nmldckeaoldbfkfnenpbclfnhpfdpnnp" rel="noopener">Add Nichely to Chrome — free</a>
+      </div>
+
+      <h2>How KDP royalties work</h2>
+      <p><strong>Ebooks</strong> earn 70% of the list price when it is between $2.99 and $12.99 on Amazon.com (the upper limit
+        was $9.99 until July 7, 2026). At 70%, Amazon subtracts a delivery cost of $0.15 per megabyte of the file. Outside that
+        band, or if you choose it, the rate is 35% with no delivery cost.</p>
+      <p><strong>Paperbacks</strong> earn 60% of the list price from $9.99 and 50% below it, and the printing cost is
+        subtracted from that share. So a cheap, thick paperback can earn very little: check that the royalty is still worth it
+        before you lower the price.</p>
+      <table class="ref">
+        <thead><tr><th>Ink (Amazon.com)</th><th>Pages</th><th>Regular trim</th><th>Large trim</th></tr></thead>
+        <tbody>
+          <tr><td>Black</td><td>24–110</td><td>$2.30</td><td>$2.84</td></tr>
+          <tr><td>Black</td><td>111–828</td><td>$1.00 + $0.012/page</td><td>$1.00 + $0.017/page</td></tr>
+          <tr><td>Standard color</td><td>72–600</td><td>$1.00 + $0.0255/page</td><td>$1.00 + $0.0402/page</td></tr>
+          <tr><td>Premium color</td><td>24–40</td><td>$3.60</td><td>$4.20</td></tr>
+          <tr><td>Premium color</td><td>41–828</td><td>$1.00 + $0.065/page</td><td>$1.00 + $0.08/page</td></tr>
+        </tbody>
+      </table>
+      <p class="small muted">Source: KDP Help, "Paperback printing costs" and "eBook royalty options" (Amazon.com), November 2026.
+        Rates change: confirm in KDP before you publish. Expanded Distribution pays 40% minus printing.</p>
+
+      <h2>FAQ</h2>
+      <h3>Why does my $8.99 paperback earn less than my $9.99 one?</h3>
+      <p>Below $9.99 the paperback rate drops from 60% to 50%, so a $1 cheaper price can cost you more than $1 in royalty.</p>
+      <h3>Is 70% always better for an ebook?</h3>
+      <p>Almost always within $2.99–$12.99. Only very large files (lots of images) can lose so much to delivery costs that 35% pays more; the calculator shows both.</p>
+      <h3>How many copies will I sell?</h3>
+      <p>Use the <a href="../bsr-calculator/">BSR to sales calculator</a> on books like yours, or check a whole niche at once with <a href="../">Nichely</a>.</p>
+      <p class="muted small">More tools: <a href="../bsr-calculator/">BSR to sales</a> · <a href="../kdp-cover-size-calculator/">Cover size</a> · <a href="../tools/">All KDP calculators</a></p>
+    </main>
+    <footer><p>Nichely is not affiliated with Amazon. Amazon, Kindle and KDP are trademarks of Amazon.com, Inc. or its affiliates. · <a href="../privacy.html">Privacy</a></p></footer>
+    <script>
+    (function () {
+      var money = function (n) { return n === null || n === undefined ? '–' : (n < 0 ? '-$' : '$') + Math.abs(n).toFixed(2); };
+      var ebook = document.getElementById('ebook');
+      var paper = document.getElementById('paper');
+      function updateEbook() {
+        var f = ebook.elements;
+        var r = KDP.ebookRoyalty(parseFloat(f.price.value), parseFloat(f.mb.value) || 0, f.plan.value);
+        document.getElementById('e-roy').textContent = r ? money(r.royalty) : '–';
+        document.getElementById('e-rate').textContent = r ? Math.round(r.rate * 100) + '%' : '–';
+        document.getElementById('e-del').textContent = r ? money(r.delivery) : '–';
+      }
+      function updatePaper() {
+        var f = paper.elements;
+        var r = KDP.paperbackRoyalty(parseFloat(f.price.value), parseInt(f.pages.value, 10), f.large.value === '1', f.ink.value);
+        document.getElementById('p-roy').textContent = r ? money(r.royalty) : '–';
+        document.getElementById('p-print').textContent = r ? money(r.print) : '–';
+        document.getElementById('p-rate').textContent = r ? Math.round(r.rate * 100) + '%' : '–';
+        document.getElementById('p-min').textContent = r ? money(Math.max(9.99, r.minPrice)) : '–';
+        document.getElementById('p-note').textContent = r ? (r.royalty <= 0 ? 'At this price the printing cost eats the whole royalty: raise the price.' : '') : 'Check the page count: black ink and premium color start at 24 pages, standard color at 72 (up to 600).';
+      }
+      ebook.addEventListener('input', updateEbook);
+      paper.addEventListener('input', updatePaper);
+      updateEbook();
+      updatePaper();
+    })();
+    </script>
+  </body>
+</html>

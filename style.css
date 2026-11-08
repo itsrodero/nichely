@@ -59,3 +59,22 @@ footer { padding: 28px 16px 40px; text-align: center; color: var(--muted); font-
   .hero h1 { font-size: 34px; }
   .grid { grid-template-columns: 1fr; }
 }
+.calc { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin: 20px 0 28px; }
+.calc .inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.calc label { display: block; font-weight: 700; font-size: 15px; }
+.calc input, .calc select { width: 100%; margin-top: 6px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font: inherit; background: var(--bg); color: var(--text); }
+.results { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-top: 18px; }
+.result { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+.result b { display: block; font-size: 24px; color: var(--green); }
+:root[data-theme="dark"] .result b { color: var(--amber); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .result b { color: var(--amber); } }
+.result span { font-size: 14px; color: var(--muted); }
+.cta { background: var(--deep); color: #fff; border-radius: 16px; padding: 20px 22px; margin: 28px 0; }
+.cta p { color: #d6e8e2; margin: 6px 0 0; }
+.cta .btn { margin-top: 14px; }
+.tools-list { display: grid; gap: 14px; padding: 0; list-style: none; }
+.tools-list a { display: block; text-decoration: none; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; }
+.tools-list strong { display: block; font-size: 18px; }
+.tools-list span { color: var(--muted); }
+table.ref { border-collapse: collapse; width: 100%; font-size: 15px; }
+table.ref th, table.ref td { border-bottom: 1px solid var(--border); padding: 8px 6px; text-align: left; }
