@@ -44,7 +44,8 @@
   }
 
   // ---------- paperback cover size ----------
-  const SPINE_PER_PAGE = { white: 0.002252, cream: 0.0025, color: 0.002347 };
+  // KDP "Create a paperback cover": standard color paper has the same thickness as white.
+  const SPINE_PER_PAGE = { white: 0.002252, cream: 0.0025, standard: 0.002252, premium: 0.002347, color: 0.002347 };
   const BLEED = 0.125;
   function coverSize(trimW, trimH, pages, paper = 'white') {
     if (!(trimW > 0 && trimH > 0 && pages >= 24)) return null;

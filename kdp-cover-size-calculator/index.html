@@ -28,7 +28,7 @@
             <option value="8.25x11">8.25" × 11"</option><option value="8.5x8.5">8.5" × 8.5"</option><option value="8.5x11">8.5" × 11"</option>
           </select></label>
           <label>Pages<input name="pages" type="number" min="24" max="828" step="2" value="120" /></label>
-          <label>Paper<select name="paper"><option value="white">White</option><option value="cream">Cream</option><option value="color">Color (standard or premium)</option></select></label>
+          <label>Paper<select name="paper"><option value="white">White</option><option value="cream">Cream</option><option value="standard">Standard color</option><option value="premium">Premium color</option></select></label>
         </div>
         <div class="results">
           <div class="result"><b id="c-size">–</b><span>full cover (inches)</span></div>
@@ -47,8 +47,8 @@
       <h2>How the size is calculated</h2>
       <p><strong>Width</strong> = bleed (0.125") + back cover + spine + front cover + bleed (0.125").<br />
         <strong>Height</strong> = bleed (0.125") + trim height + bleed (0.125").</p>
-      <p><strong>Spine width</strong> depends on the page count and the paper: 0.002252" per page for white paper, 0.0025" for
-        cream and 0.002347" for color. KDP only allows text on the spine when the book has more than 79 pages.</p>
+      <p><strong>Spine width</strong> depends on the page count and the paper: 0.002252" per page for white paper (also standard
+        color), 0.0025" for cream and 0.002347" for premium color. KDP only allows text on the spine when the book has more than 79 pages.</p>
       <p>Keep titles and important artwork at least 0.125" inside the trim lines, and spine text at least 0.0625" away from the
         spine edges. For an exact template with the barcode area, download KDP's cover template for your book.</p>
 
