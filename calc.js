@@ -10,14 +10,14 @@
   }
 
   // ---------- royalties (Amazon.com marketplace) ----------
-  // Ebook: 70% between $2.99 and $12.99 (band widened from $9.99 on July 7, 2026), minus
-  // delivery at $0.15/MB; otherwise 35%.
+  // Ebook: 70% x (list price - delivery at $0.15/MB) between $2.99 and $12.99 (band widened
+  // from $9.99 on July 7, 2026); otherwise 35% of the list price. Formula from KDP's pricing page.
   function ebookRoyalty(price, fileMb = 1, plan = 'auto') {
     if (!(price > 0)) return null;
     const eligible70 = price >= 2.99 && price <= 12.99;
     const rate = plan === '35' || !eligible70 ? 0.35 : 0.7;
     const delivery = rate === 0.7 ? Math.max(0, fileMb) * 0.15 : 0;
-    return { rate, delivery, royalty: Math.max(0, price * rate - delivery) };
+    return { rate, delivery, royalty: Math.max(0, (price - delivery) * rate) };
   }
 
   // Amazon.com paperback printing costs (KDP help "printing costs", 2026). Large trim = wider
