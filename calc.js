@@ -2,11 +2,22 @@
 // and importable in Node for the checks in nichely/test.
 (() => {
   // ---------- BSR -> sales (same curves as the Nichely extension) ----------
-  const MODELS = { kindle: { a: 16986, b: 0.877 }, books: { a: 19450, b: 0.8495 } };
+  // Copies sold per day at a Best Sellers Rank on Amazon.com, interpolated (log-log) between
+  // anchor points from commonly published BSR tables (Kindle: ~120/day at #1,000, ~17 at
+  // #10,000, ~1 at #100,000; print: ~55, ~8 and ~1.1). The tail falls faster than the top,
+  // which a single power curve can't follow. Estimates only.
+  const CURVES = {
+    kindle: [[1, 7000], [100, 700], [1000, 120], [10000, 17], [100000, 1], [1000000, 0.04]],
+    books: [[1, 5000], [100, 400], [1000, 55], [10000, 8], [100000, 1.1], [1000000, 0.04]],
+  };
   function salesPerDay(bsr, store) {
-    if (!(bsr >= 1)) return null;
-    const m = MODELS[store] || MODELS.books;
-    return m.a * bsr ** -m.b;
+    const pts = CURVES[store];
+    if (!pts || !(bsr >= 1)) return null;
+    let i = 1;
+    while (i < pts.length - 1 && bsr > pts[i][0]) i += 1;
+    const [[r0, s0], [r1, s1]] = [pts[i - 1], pts[i]];
+    const t = (Math.log(bsr) - Math.log(r0)) / (Math.log(r1) - Math.log(r0));
+    return Math.exp(Math.log(s0) + t * (Math.log(s1) - Math.log(s0)));
   }
 
   // ---------- royalties (Amazon.com marketplace) ----------

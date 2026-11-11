@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome to Nichely</title>
+    <meta name="description" content="Nichely is installed. Search a keyword on Amazon and click Check niche." />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="../icon128.png" />
+    <link rel="stylesheet" href="../style.css" />
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"],wait_for_update:500});gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});gtag('js',new Date());gtag('config','G-MKM07L3RLR');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-MKM07L3RLR';document.head.appendChild(s);},1200);});</script>
+  </head>
+  <body>
+    <header class="top"><a href="../" class="logo"><img src="../icon128.png" alt="" width="28" height="28" />Nichely</a></header>
+    <main class="doc">
+      <h1>Nichely is ready</h1>
+      <p>It works on Amazon.com search pages, in Books and Kindle Store. Three steps:</p>
+      <ol class="steps">
+        <li>Search a keyword on Amazon.com, for example <strong>gratitude journal for teens</strong>.</li>
+        <li>Click the green <strong>Check niche</strong> button at the bottom right of the page.</li>
+        <li>Read the score and the reasons, then open <strong>Keyword ideas</strong> to find a better angle.</li>
+      </ol>
+      <p>Try it now with one of these:</p>
+      <p>
+        <a class="btn try" href="https://www.amazon.com/s?k=gratitude+journal+for+teens&amp;i=stripbooks" data-k="journal">Books: gratitude journal for teens</a>
+        <a class="btn try" href="https://www.amazon.com/s?k=cozy+mystery+cat&amp;i=digital-text" data-k="kindle" style="background:var(--surface);color:var(--text);border:1px solid var(--border)">Kindle: cozy mystery cat</a>
+      </p>
+      <h2>Good to know</h2>
+      <ul>
+        <li>Sales are <strong>estimates</strong> from the Best Sellers Rank. The rank moves every hour, so check a niche on two or three days before you commit.</li>
+        <li>Your last checks stay in the panel, so you can compare keywords side by side.</li>
+        <li>Pin Nichely to the toolbar (the puzzle icon, then the pin) to search Amazon from any tab.</li>
+      </ul>
+      <p class="muted small">Free KDP calculators: <a href="../kdp-royalty-calculator/">royalties</a> · <a href="../bsr-calculator/">BSR to sales</a> · <a href="../kdp-cover-size-calculator/">cover size</a>. Questions or ideas: <a href="mailto:leafpost.dev@gmail.com">leafpost.dev@gmail.com</a></p>
+    </main>
+    <script>
+      document.querySelectorAll('a.try').forEach(function (a) {
+        a.addEventListener('click', function () { gtag('event', 'nichely_welcome_try', { example: a.dataset.k }); });
+      });
+      gtag('event', 'nichely_install', { version: (new URLSearchParams(location.search).get('v') || '').replace(/[^0-9.]/g, '') });
+    </script>
+  </body>
+</html>

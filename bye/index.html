@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nichely was removed</title>
+    <meta name="description" content="Tell us why you removed Nichely." />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="../icon128.png" />
+    <link rel="stylesheet" href="../style.css" />
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',region:["AT","BE","BG","HR","CY","CZ","DK","EE","FI","FR","DE","GR","HU","IE","IT","LV","LT","LU","MT","NL","PL","PT","RO","SK","SI","ES","SE","IS","LI","NO","GB","CH"],wait_for_update:500});gtag('consent','default',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});gtag('js',new Date());gtag('config','G-MKM07L3RLR');addEventListener('load',function(){setTimeout(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-MKM07L3RLR';document.head.appendChild(s);},1200);});</script>
+  </head>
+  <body>
+    <header class="top"><a href="../" class="logo"><img src="../icon128.png" alt="" width="28" height="28" />Nichely</a></header>
+    <main class="doc">
+      <h1>Nichely was removed</h1>
+      <p>Sorry it didn't work out. One click below tells us what to fix (no email needed).</p>
+      <form id="bye" class="waitlist">
+        <fieldset>
+          <legend>Why did you remove it?</legend>
+          <label class="feature"><input type="radio" name="why" value="not-working" required /><span>It didn't work or showed no data</span></label>
+          <label class="feature"><input type="radio" name="why" value="estimates" /><span>The sales estimates looked wrong</span></label>
+          <label class="feature"><input type="radio" name="why" value="missing" /><span>It's missing something I need</span></label>
+          <label class="feature"><input type="radio" name="why" value="other-store" /><span>I need another Amazon store (UK, DE…)</span></label>
+          <label class="feature"><input type="radio" name="why" value="one-off" /><span>I only needed it once</span></label>
+          <label class="feature"><input type="radio" name="why" value="other" /><span>Something else</span></label>
+        </fieldset>
+        <label class="field"><span>What should we change? (optional)</span><textarea name="comment" rows="3" maxlength="1000"></textarea></label>
+        <button class="btn" type="submit" style="border:0;cursor:pointer;font:inherit;font-weight:800">Send</button>
+        <p class="form-msg" role="alert" hidden></p>
+      </form>
+      <p id="thanks" class="thanks" role="status" hidden>Thanks, that really helps. If you change your mind, Nichely is <a href="https://chromewebstore.google.com/detail/nmldckeaoldbfkfnenpbclfnhpfdpnnp">here</a>.</p>
+    </main>
+    <script>
+    (function () {
+      // Same Google Form as the Pro waitlist; Source "nichely-uninstall" keeps these answers apart.
+      var FORM = {
+        action: 'https://docs.google.com/forms/d/e/1FAIpQLScdXcUCX0gxzC544GPy_v9pci35rMe7un0DrUK7RWMeKzT53w/formResponse',
+        entry: { features: 'entry.75689870', comment: 'entry.1451580480', source: 'entry.1357422267' },
+      };
+      var version = (new URLSearchParams(location.search).get('v') || '').replace(/[^0-9.]/g, '').slice(0, 12);
+      var form = document.getElementById('bye');
+      gtag('event', 'nichely_uninstall', { version: version });
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var why = form.elements.why.value;
+        var body = new URLSearchParams();
+        body.append(FORM.entry.features, 'nichely:uninstall-' + why);
+        body.append(FORM.entry.comment, form.elements.comment.value.trim());
+        body.append(FORM.entry.source, ['nichely-uninstall', version && 'v' + version].filter(Boolean).join(' | '));
+        form.querySelector('button').disabled = true;
+        fetch(FORM.action, { method: 'POST', mode: 'no-cors', body: body }).then(function () {
+          gtag('event', 'nichely_uninstall_reason', { reason: why });
+          form.hidden = true;
+          document.getElementById('thanks').hidden = false;
+        }, function () {
+          var msg = form.querySelector('.form-msg');
+          msg.textContent = 'Something went wrong. Please try again in a minute.';
+          msg.hidden = false;
+          form.querySelector('button').disabled = false;
+        });
+      });
+    })();
+    </script>
+  </body>
+</html>
